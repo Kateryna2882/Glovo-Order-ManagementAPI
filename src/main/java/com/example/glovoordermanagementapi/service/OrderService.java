@@ -9,7 +9,7 @@ import com.example.glovoordermanagementapi.model.Product;
 import java.util.List;
 
 public interface OrderService {
-    Order createOrder(int orderId) throws BadRequestException;
+    Order createOrder(int orderNew) throws BadRequestException;
     Order updateOrder(Order order) throws NotFoundException;
     Order getOrderById(int orderId) throws NotFoundException;
     void deleteOrder(Order order) throws NotFoundException;

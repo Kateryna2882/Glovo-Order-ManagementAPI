@@ -4,18 +4,24 @@ package com.example.glovoordermanagementapi.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter
+@Setter
 @Data
 @AllArgsConstructor
 public class Order {
-
+    @Setter
+    private int id;
     private int orderId;
     private List<Product> products;
+    public Order() {
 
+    }
     public Order(int orderId) {
+
         this.orderId = orderId;
         this.products = new ArrayList<>();
     }

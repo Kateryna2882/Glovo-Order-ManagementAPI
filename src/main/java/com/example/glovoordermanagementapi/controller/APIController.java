@@ -19,8 +19,14 @@ import java.util.List;
 @Controller
 @RequestMapping("/api/orders")
 public class APIController {
+
     private static ProductService productService;
+    @Autowired
     private final OrderService orderService;
+
+    public APIController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @SneakyThrows
     @PostMapping("/create")
@@ -29,10 +35,14 @@ public class APIController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        Order createdOrder = orderService.createOrder(orderId);
+        // Створення об'єкта Order
+        Order orderNew = orderService.createOrder(orderId);
+
+        // Виклик сервісу для створення замовлення
+        Order createdOrder = orderService.createOrder(orderNew.getId());
+
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
     }
-
 
     @GetMapping("/{orderId}")
     public ResponseEntity<Order> getOrderById(@PathVariable int orderId) throws NotFoundException {
